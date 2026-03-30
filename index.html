@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog - Huerta Familiar de Plantas Medicinales</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --emerald-dark: #1a5c3a;
+    --emerald: #2d8659;
+    --emerald-light: #3da36e;
+    --emerald-pale: #e8f5ee;
+    --leaf: #4caf50;
+    --sage: #8fbc8f;
+    --earth: #6b4226;
+    --earth-light: #8b6914;
+    --sand: #f5f0e8;
+    --sand-dark: #e8ddc8;
+    --cream: #fdfbf7;
+    --text-dark: #2c2c2c;
+    --text-body: #3d3d3d;
+    --text-muted: #6b6b6b;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', Georgia, serif;
+    background: var(--cream);
+    color: var(--text-body);
+    line-height: 1.8;
+    font-size: 16px;
+  }
+
+  /* ===== HEADER ===== */
+  .blog-header {
+    background: linear-gradient(135deg, #0d3b1e 0%, #1a5c3a 30%, #2d8659 60%, #1a5c3a 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 60px 20px 50px;
+    text-align: center;
+    color: var(--white);
+  }
+
+  .blog-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M40 180 Q60 120 50 80 Q45 60 60 40' stroke='rgba(255,255,255,0.06)' fill='none' stroke-width='2'/%3E%3Cpath d='M50 80 Q70 70 80 50' stroke='rgba(255,255,255,0.05)' fill='none' stroke-width='1.5'/%3E%3Cpath d='M50 80 Q30 70 25 55' stroke='rgba(255,255,255,0.05)' fill='none' stroke-width='1.5'/%3E%3Cpath d='M150 190 Q155 140 145 100 Q140 70 155 45' stroke='rgba(255,255,255,0.06)' fill='none' stroke-width='2'/%3E%3Cpath d='M145 100 Q165 85 180 75' stroke='rgba(255,255,255,0.05)' fill='none' stroke-width='1.5'/%3E%3Cpath d='M145 100 Q125 90 115 75' stroke='rgba(255,255,255,0.05)' fill='none' stroke-width='1.5'/%3E%3C/svg%3E") repeat;
+    opacity: 1;
+  }
+
+  .leaf-deco {
+    position: absolute;
+    opacity: 0.08;
+    font-size: 120px;
+    z-index: 0;
+  }
+  .leaf-deco.l1 { top: -10px; left: 5%; transform: rotate(-30deg); }
+  .leaf-deco.l2 { top: 20px; right: 8%; transform: rotate(25deg); font-size: 90px; }
+  .leaf-deco.l3 { bottom: -15px; left: 15%; transform: rotate(45deg); font-size: 100px; }
+  .leaf-deco.l4 { bottom: 10px; right: 12%; transform: rotate(-15deg); font-size: 80px; }
+  .leaf-deco.l5 { top: 50%; left: 2%; transform: rotate(60deg); font-size: 70px; }
+  .leaf-deco.l6 { top: 40%; right: 3%; transform: rotate(-50deg); font-size: 75px; }
+
+  .header-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .header-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+    display: block;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+  }
+
+  .blog-header h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 15px rgba(0,0,0,0.3);
+    line-height: 1.2;
+  }
+
+  .blog-header .subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    opacity: 0.92;
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+
+  .header-meta {
+    font-size: 0.85rem;
+    opacity: 0.85;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+  }
+
+  .header-meta strong { font-weight: 600; }
+
+  .header-divider {
+    width: 60px;
+    height: 2px;
+    background: rgba(255,255,255,0.4);
+    margin: 15px auto;
+    border: none;
+  }
+
+  /* ===== MAIN CONTENT ===== */
+  .blog-body {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* ===== ENTRY ===== */
+  .entry {
+    margin-top: 50px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    overflow: hidden;
+    border: 1px solid rgba(45,134,89,0.1);
+  }
+
+  .entry-label-bar {
+    background: linear-gradient(135deg, var(--emerald-dark), var(--emerald));
+    color: var(--white);
+    padding: 14px 30px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .entry-number {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .entry-leaf {
+    font-size: 1.3rem;
+    opacity: 0.7;
+  }
+
+  .entry-content {
+    padding: 35px 35px 40px;
+  }
+
+  .entry-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 700;
+    color: var(--emerald-dark);
+    margin-bottom: 25px;
+    line-height: 1.35;
+    border-bottom: 2px solid var(--emerald-pale);
+    padding-bottom: 15px;
+  }
+
+  .entry-content p {
+    margin-bottom: 18px;
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text-body);
+    hyphens: auto;
+  }
+
+  .entry-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ===== SEPARATORS ===== */
+  .entry-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 50px auto;
+    max-width: 300px;
+  }
+
+  .sep-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--sage), transparent);
+  }
+
+  .sep-icon {
+    color: var(--emerald);
+    font-size: 1.4rem;
+    opacity: 0.6;
+  }
+
+  /* ===== REFERENCES ===== */
+  .references {
+    margin-top: 50px;
+    background: var(--sand);
+    border-radius: 12px;
+    padding: 35px;
+    border-left: 4px solid var(--emerald);
+  }
+
+  .references h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.5rem;
+    color: var(--emerald-dark);
+    margin-bottom: 20px;
+  }
+
+  .references p {
+    font-size: 0.92rem;
+    margin-bottom: 12px;
+    padding-left: 2em;
+    text-indent: -2em;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  /* ===== FOOTER ===== */
+  .blog-footer {
+    background: var(--emerald-dark);
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 25px 20px;
+    font-size: 0.85rem;
+    margin-top: 0;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 600px) {
+    .entry-content { padding: 25px 20px 30px; }
+    .entry-label-bar { padding: 12px 20px; }
+    .references { padding: 25px 20px; }
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    body { background: white; font-size: 11pt; }
+    .blog-header { break-after: avoid; }
+    .entry { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
+    .entry-separator { margin: 30px auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="blog-header">
+  <span class="leaf-deco l1">🌿</span>
+  <span class="leaf-deco l2">🍃</span>
+  <span class="leaf-deco l3">🌱</span>
+  <span class="leaf-deco l4">☘️</span>
+  <span class="leaf-deco l5">🌿</span>
+  <span class="leaf-deco l6">🍀</span>
+  <div class="header-content">
+    <span class="header-icon">🌱</span>
+    <h1>Huerta Familiar de Plantas Medicinales</h1>
+    <p class="subtitle">Blog de Práctica Social — PRAC1010</p>
+    <hr class="header-divider">
+    <div class="header-meta">
+      <strong>Ingrid Vanessa Galindo Sánchez</strong> · ID: 435038<br>
+      Ingeniería de Sistemas · 10.° semestre<br>
+      UNIMINUTO Virtual y a Distancia<br>
+      Corporación Universitaria Minuto de Dios — Centro de Educación para el Desarrollo
+    </div>
+  </div>
+</header>
+
+<!-- ===== BLOG BODY ===== -->
+<main class="blog-body">
+
+  <!-- ===== ENTRADA 1 ===== -->
+  <article class="entry">
+    <div class="entry-label-bar">
+      <span class="entry-leaf">🌿</span>
+      <span class="entry-number">Entrada 1</span>
+    </div>
+    <div class="entry-content">
+      <h2 class="entry-title">Raíces olvidadas: plantas medicinales y salud familiar en la ciudad</h2>
+      <p>Hay una imagen que se repite en muchos hogares bogotanos: la abuela que sabía cuál hoja usar para el dolor de estómago, qué flor para el insomnio, qué raíz para la tos. Esa tradición de saber que fue transmitida de voz en voz entre generaciones, fue durante siglos un sistema silente de salud. Hoy, en numerosas familias urbanas, esa voz se ha apagado casi por completo, con ella la posibilidad de cuidarnos desde lo propio.</p>
+      <p>En el barrio San José del Prado, localidad de Suba, el patio de una vivienda familiar estaba subutilizado en su totalidad: tierra sin sembrar, espacio poco utilizado, potencial inexplorado. A pocas cuadras, en tiendas naturistas y farmacias, se expendían infusiones de plantas que perfectamente podrían cultivarse en esa zona del patio. Esta contradicción dio pie al proyecto de práctica social que se puede encontrar reflejado en este blog: recuperar la utilización de las plantas medicinales como práctica cotidiana de salud en un núcleo familiar de seis integrantes.</p>
+      <p>El diagnóstico inicial de la familia reveló lo que ya se conocía, aunque no por eso menos alarmante: no hay quien cultive plantas medicinales, el conocimiento de las mismas es fragmentado y dependiente de fuentes comerciales, y la relación con la naturaleza se ha reducido a lo ornamental. Esta situación no es particular de una familia, sino que representa a millones de familias urbanas en Colombia y América Latina.</p>
+      <p>A nivel nacional, Colombia está considerada uno de los países que más plantas medicinales reporta en el mundo, con más de 3.000 especies documentadas. No obstante, el uso doméstico y comunitario de las plantas se ha reducido drásticamente en las últimas décadas, impulsado, por un lado, por la migración rural-urbana, por el otro, por el boom de las medicinas farmacéuticas y, además, por la disminución de los espacios verdes en las ciudades. De acuerdo con el IDEAM y el Instituto Alexander von Humboldt, el disminuir la biodiversidad también sería sinónimo de disminuir saberes, y esto generaría un círculo muy difícil de romper.</p>
+      <p>A nivel global, la Organización Mundial de la Salud establece que el 80% de la población mundial dependía de una primera línea de atención en salud mediante plantas medicinales, pero esta situación la misma Organización advierte que el conocimiento sobre las mismas se encuentra en la pérdida rápida, especialmente en los pueblos que han integrado procesos de urbanización y aculturación. Experiencias en América Latina como las huertas comunitarias guatemaltecas, los jardines medicinales mexicanos y las farmacias vivas brasileñas vislumbran caminos posibles ante este hecho.</p>
+      <p>Ante esta situación, el proyecto de huerta familiar en San José del Prado se suma en una respuesta concreta, cercana y replicable. Se trata de no volver a un pasado idealizado, sino más bien a combinar el conocimiento ancestral con las condiciones y necesidad del presente. Sembrar caléndula para la piel, manzanilla para el sistema digestivo, albahaca para los resfriados o sábila para las quemaduras, simultáneamente es un acto de salud, de soberanía y de memoria cultural.</p>
+      <p>A nivel mundial, la Organización Mundial de la Salud ha manifestado que el 80% de la población mundial hace uso de plantas medicinales como tratamiento de salud de primera línea. Asimismo, advierte que el saber sobre estas plantas se está perdiendo a gran velocidad, sobre todo en comunidades. Por otra parte; más allá de los propios beneficios, la huerta doméstica tiene el potencial de transformar las dinámicas de las relaciones: reunir a la familia en torno a un objetivo, hacer recuperar las conversaciones intergeneracionales sobre el uso de las plantas, y abrir la puerta a una forma de cuidado que no se agota en el consumo. En este sentido, plantar no es solo una cuestión agrícola; también es un acto político, cultural y afectivo; en este sentido, el blog es la viva memoria de ese proceso.</p>
+    </div>
+  </article>
+
+  <div class="entry-separator">
+    <span class="sep-line"></span>
+    <span class="sep-icon">🌿</span>
+    <span class="sep-line"></span>
+  </div>
+
+  <!-- ===== ENTRADA 2 ===== -->
+  <article class="entry">
+    <div class="entry-label-bar">
+      <span class="entry-leaf">🍃</span>
+      <span class="entry-number">Entrada 2</span>
+    </div>
+    <div class="entry-content">
+      <h2 class="entry-title">La huerta como espacio de transformación familiar</h2>
+      <p>Hay un silencio con el que crece la distancia entre los miembros de una familia cuando el ritmo de la vida cotidiana se adueña de todo el territorio del encuentro: del trabajo, de las pantallas, de los compromisos, de las rutinas que cansan y que no dejan lugar para el encuentro verdadero. Pero esa distancia no tiene que ver con la distancia en metros, sino con la ausencia de proyectos comunes, de conversaciones no logísticas, de experiencias que hagan la vida como algo construido con otros. La huerta medicinal del patio de la familia Galindo de San José del Prado se reveló como un medio inesperadamente potente para acortar esa distancia.</p>
+      <p>Desde la primera reunión de familia, la que tuvo lugar en la semana dos de proyecto, el simple hecho de reunirse con una finalidades concreta ya era en sí mismo un hecho extraordinario, seis personas que, con edades, intereses y rutinas diferentes, se sentaban alrededor de la mesa a hablar de tierra, de semillas, de plantas que curan. La agenda era técnica pero el ambiente que se generó fue otro: el de quienes comparten un territorio común y empiezan a pensarlo de cualquier otra manera.</p>
+      <p>El taller de capacitación en cultivo, desarrollado a lo largo del patio durante el tercer momento del taller con la participación de Ingrid y su madre, supuso el primer momento de trabajo práctico. Aprender juntas a preparar el sustrato, a hacer la identificación de las semillas, a comprender las condiciones de luz y humedad que necesitan las plantas, generó una dinámica que escasas actividades logran: la de aprender en igualdad de condiciones, puesto que el conocimiento no va de arriba a abajo, sino que se construye entre pares. La madre, con recuerdos fragmentarios del jardín de su infancia, y la hija, con información técnica recién investigada, se fueron complementando de un modo inesperado para ellas.</p>
+      <p>La instalación de la huerta en el cuarto momento fue el más colectivo del proceso. Con las macetas recicladas, el compost de casa y las semillas compradas de acuerdo con el presupuesto del proyecto, toda la familia participó en la siembra de las ocho especies elegidas: manzanilla, albahaca, sábila, caléndula, toronjil, menta, romero y ruda. Cada persona eligió la planta con la que estaba más identificada ante la familia, lo que a su vez contribuyó a construir líneas que reforzaron el sentido de responsabilidad sobre la huerta. Ya no era la planta que podría haber sido la misma para todo el mundo, sino «la de mamá» o «la del abuelo».</p>
+      <p>A lo largo de las semanas de seguimiento, la práctica de revisar juntos el estado de las plantas, de regar, de podar, de anotar el crecimiento en la libreta de la familia, fue conformando un lugar de conversación informal que se alejaba mucho del cuidado de plantas. Preguntando cuando hay que cosechar se llegaba a contar historias sobre el campo, sobre enfermedades que se curaban con las plantas, sobre remedios de abuelas, sobre recetas heredadas. La huerta devino el archivo vivo de la memoria familiar.</p>
+      <p>Desde la perspectiva de la medicina comunitaria, la experiencia reafirmó que el bienestar no puede ser entendido como ausencia de enfermedad, sino que corresponde a la existencia de vínculos sanos, de saberes en común, de capacidad de agencia sobre el propio cuerpo y el entorno. La huerta no cumple el papel que ocuparía el médico, pero sí enseña aquello que el sistema de salud convencional se cuida de transmitir: que podemos cuidarnos, que el saber es nuestro y que la tierra reacciona, si la atendemos.</p>
+      <p>El resultado más significativo de esta fase piloto del proyecto no depende de los vegetales vivos y de remedios elaborados (aunque también hubo eso), sino de la renovada disposición de la familia a hacer algo juntos, de la sensación de que el patio ignorado cobraba vida y de la certeza de que cuidar a un ser vivo —aunque éste sea una planta— nos recuerda que también somos seres vivos que podemos crecer.</p>
+    </div>
+  </article>
+
+  <div class="entry-separator">
+    <span class="sep-line"></span>
+    <span class="sep-icon">🌱</span>
+    <span class="sep-line"></span>
+  </div>
+
+  <!-- ===== ENTRADA 3 ===== -->
+  <article class="entry">
+    <div class="entry-label-bar">
+      <span class="entry-leaf">🌱</span>
+      <span class="entry-number">Entrada 3</span>
+    </div>
+    <div class="entry-content">
+      <h2 class="entry-title">Biodiversidad y memoria: conservar lo que heredamos</h2>
+      <p>Colombia es el segundo país más biodiverso del planeta. Su territorio alberga aproximadamente el 10% de todas las especies de flora conocidas en el mundo, y entre ellas, miles de plantas con propiedades medicinales documentadas tanto por la ciencia occidental como por los sistemas de conocimiento indígena, afrodescendiente y campesino. Este patrimonio, forjado durante miles de años de relación entre las comunidades y sus territorios, enfrenta hoy una amenaza paradójica: no viene principalmente de la deforestación o el cambio climático, aunque también de ahí, sino de algo más sutil y más difícil de ver: el olvido.</p>
+      <p>Cuando una familia deja de usar una planta medicinal, no solo abandona una práctica de salud; abandona también el conjunto de saberes asociados a ella: cuándo se cosecha, cómo se prepara, para qué sirve, cuáles son sus contraindicaciones, qué historias lleva consigo. Ese saber no está necesariamente en los libros; vive en la memoria de personas concretas, en prácticas cotidianas, en rituales de cuidado. Cuando esas personas desaparecen sin transmitirlo, el saber se pierde para siempre, y con él, una forma irreemplazable de relacionarse con la naturaleza.</p>
+      <p>En Bogotá, como en muchas ciudades latinoamericanas, la migración campo-ciudad ha tenido un efecto cultural devastador sobre el conocimiento botánico popular. Las personas que llegaron del campo traían consigo ese saber; pero en la ciudad, sin jardines, sin acceso a las plantas, sin comunidades de práctica que reforzaran el conocimiento, ese saber fue diluyéndose en pocas generaciones. La urbanización no solo transformó los paisajes, sino también las memorias y las identidades asociadas a ellos.</p>
+      <p>La pérdida de biodiversidad endémica agrava esta situación. Según el Instituto Alexander von Humboldt, Colombia tiene al menos 64 especies de plantas endémicas que se encuentran en alguna categoría de amenaza. Muchas de ellas tienen usos medicinales documentados por comunidades indígenas y campesinas, pero la falta de estrategias de conservación in situ —en sus hábitats naturales— y ex situ —en jardines botánicos o bancos de semillas— pone en riesgo tanto la biodiversidad como el conocimiento asociado a ella.</p>
+      <p>En este contexto, las huertas familiares y comunitarias de plantas medicinales no son solo espacios de producción: son también espacios de conservación y transmisión cultural. Cada vez que una familia decide sembrar toronjil, ruda o caléndula en su patio, está contribuyendo, de manera pequeña pero real, a mantener vivo un vínculo con la biodiversidad y con la memoria biocultural de su territorio. Este es uno de los principios que guió el proyecto en San José del Prado: pensar la huerta no solo como fuente de salud inmediata, sino como práctica de conservación a largo plazo.</p>
+      <p>Durante el proceso de investigación previo al proyecto, surgieron emociones encontradas. La empatía hacia familias que, sin recursos económicos para acceder al sistema de salud convencional, tampoco tienen acceso al conocimiento botánico que podría ofrecerles alternativas, generó un sentido profundo de responsabilidad. La preocupación por la velocidad con que se están perdiendo estas tradiciones impulsó la convicción de que actuar a nivel local —en el propio hogar, con la propia familia— es una forma legítima y urgente de resistencia cultural.</p>
+      <p>La huerta familiar, entonces, es mucho más que un jardín: es un archivo vivo, un espacio de educación intergeneracional y un acto de recuperación de soberanía sobre el conocimiento y la salud. En ella coexisten el pasado que no queremos perder y el futuro que queremos construir. Cada planta que crece en ese patio de Suba lleva consigo no solo propiedades medicinales, sino también una historia, una identidad y una promesa de continuidad.</p>
+    </div>
+  </article>
+
+  <div class="entry-separator">
+    <span class="sep-line"></span>
+    <span class="sep-icon">☘️</span>
+    <span class="sep-line"></span>
+  </div>
+
+  <!-- ===== ENTRADA 4 ===== -->
+  <article class="entry">
+    <div class="entry-label-bar">
+      <span class="entry-leaf">☘️</span>
+      <span class="entry-number">Entrada 4</span>
+    </div>
+    <div class="entry-content">
+      <h2 class="entry-title">De la siembra a la cosecha: resultados, aprendizajes y sostenibilidad</h2>
+      <p>Ocho semanas. Ese fue el tiempo que duró el proceso formal del proyecto de práctica social. Pero lo que ocurrió en ese patio de San José del Prado no tiene una fecha de cierre: las plantas siguen creciendo, el conocimiento adquirido sigue aplicándose, y la dinámica familiar que se transformó durante el proceso continúa evolucionando. Esta entrada es un recuento honesto de lo que se logró, lo que quedó pendiente y lo que se aprendió en el camino.</p>
+      <p>Al finalizar las ocho semanas, la huerta contaba con ocho plantas medicinales establecidas: manzanilla, albahaca, sábila, caléndula, toronjil, menta, romero y ruda. El 85% de ellas se encontraba en estado viable, con crecimiento activo y sin plagas significativas. Los seis miembros de la familia participaron en al menos una de las actividades del proyecto, y todos reportaron haber utilizado alguna de las plantas para preparar remedios caseros. El indicador de autosuficiencia en remedios hogareños, proyectado en un 70% al cierre, se logró de manera parcial: algunas plantas ya estaban listas para uso regular, mientras que otras requerían más tiempo de crecimiento.</p>
+      <p>El mayor logro, sin embargo, no fue cuantitativo sino cualitativo: la familia desarrolló una nueva relación con el espacio del patio y con las prácticas de cuidado de la salud. Lo que antes era un área ignorada se convirtió en un espacio de encuentro, de aprendizaje y de orgullo compartido. Varios miembros de la familia comenzaron a investigar por cuenta propia sobre nuevas plantas que podrían incorporar a la huerta, y surgieron conversaciones espontáneas sobre recetas medicinales heredadas que nadie había recordado por años.</p>
+      <p>Los aprendizajes del proceso también revelaron desafíos reales que es importante documentar con honestidad. El tiempo de dedicación requerido para el monitoreo semanal fue más exigente de lo anticipado, especialmente en semanas con alta carga laboral y académica. Algunas plantas, como la sábila, requirieron más tiempo del previsto para establecerse correctamente. La coordinación de las actividades grupales implicó un esfuerzo de negociación constante. Estos obstáculos, lejos de ser fracasos, forman parte del aprendizaje real sobre lo que significa implementar un proyecto de salud comunitaria desde el ámbito doméstico.</p>
+      <p>La sostenibilidad del proyecto depende de varios factores identificados durante el proceso. En primer lugar, la designación de responsabilidades claras: cada miembro de la familia asumió el cuidado de una o dos plantas específicas, lo que distribuye la carga y mantiene el compromiso personal. En segundo lugar, la documentación continua en la libreta familiar crea un archivo de conocimiento propio que puede compartirse y enriquecerse. En tercer lugar, la posibilidad de expandir la huerta a espacios adicionales abre perspectivas de crecimiento futuro.</p>
+      <p>Desde la perspectiva de la responsabilidad social universitaria, este proyecto demuestra que las prácticas de transformación comunitaria no siempre requieren grandes recursos ni infraestructuras complejas. A veces, el cambio más significativo comienza en el espacio más cercano: el hogar, la familia, el patio. La universidad, en este caso UNIMINUTO, tiene la misión de acompañar esos procesos con formación crítica, metodologías participativas y un enfoque genuino de servicio a las comunidades.</p>
+      <p>Esta práctica social dejó una convicción que va más allá del proyecto específico: cuando recuperamos nuestra relación con la tierra y con el conocimiento ancestral sobre las plantas, no solo mejoramos nuestra salud; nos reconectamos con quiénes somos y de dónde venimos. Y eso, en tiempos de fragmentación y aceleración, es también una forma de sanación.</p>
+    </div>
+  </article>
+
+  <!-- ===== REFERENCIAS ===== -->
+  <section class="references">
+    <h2>Referencias</h2>
+    <p>Bernal, H. Y., García, H., y Quevedo, G. F. (2011). <em>Pautas para el conocimiento, conservación y uso sostenible de las plantas medicinales nativas en Colombia</em>. Instituto Alexander von Humboldt.</p>
+    <p>Corporación Universitaria Minuto de Dios. (2023). <em>Lineamientos de práctica social</em>. UNIMINUTO.</p>
+    <p>Galindo, I. (2024). <em>Diario de campo: Huerta familiar de plantas medicinales</em>. PRAC1010, UNIMINUTO. [Documento no publicado].</p>
+    <p>Instituto Alexander von Humboldt. (2021). <em>Biodiversidad y conocimiento tradicional en Colombia</em>. IAvH.</p>
+    <p>Ministerio de Salud de Colombia. (2020). <em>Plantas medicinales y salud comunitaria en Colombia</em>. MinSalud.</p>
+    <p>Organización Mundial de la Salud. (2019). <em>Traditional medicine strategy 2019–2025</em>. OMS.</p>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="blog-footer">
+  PRAC1010 — Práctica en Responsabilidad Social · UNIMINUTO Virtual y a Distancia · 2024
+</footer>
+
+</body>
+</html>
